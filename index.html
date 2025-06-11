@@ -11,108 +11,64 @@
     height: 100%;
     font-family: Arial, sans-serif;
   }
-
-  /* Container for video */
-  .video-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .video-container video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-  }
-
-  /* Logo and nav */
-  .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .logo {
-    color: #fff;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-
-  .nav {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1em;
-    transition: color 0.3s;
-  }
-
-  .nav a:hover {
-    color: #ddd;
-  }
-
-  /* Content below the video */
-  .content {
-    background: #f4f4f4;
-    padding: 50px;
-  }
-
-  .portfolio-item {
-    margin-bottom: 40px;
-  }
-
-  .portfolio-item h2 {
-    margin-bottom: 10px;
-  }
-
-  .portfolio-item p {
-    margin: 0;
-  }
+  .video-container { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+  .video-container video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%); object-fit: cover; }
+  .header { position: absolute; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px; box-sizing: border-box; }
+  .logo { color: #fff; font-size: 1.5em; font-weight: bold; }
+  .nav { display: flex; gap: 20px; }
+  .nav a { color: #fff; text-decoration: none; font-size: 1em; transition: color 0.3s; }
+  .nav a:hover { color: #ddd; }
+  .content { background: #f4f4f4; padding: 50px; }
+  .portfolio-item { margin-bottom: 40px; }
+  .portfolio-item h2 { margin-bottom: 10px; }
+  .portfolio-item p { margin: 0; }
+  .research-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .research-item { background: #fff; border: 1px solid #ddd; border-radius: 5px; overflow: hidden; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+  .research-item img { width: 100%; height: auto; }
+  .research-item h3 { margin: 10px; font-size: 1.2em; }
+  .research-item a { display: block; padding: 10px; text-decoration: none; color: #333; }
+  .research-item a:hover { background: #eee; }
 </style>
 </head>
 <body>
-
 <div class="video-container">
   <video autoplay muted loop>
-    <source src="media/clouds.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    <source src="media/clouds.mp4" type="video/mp4"> Your browser does not support the video tag.
   </video>
-
   <div class="header">
     <div class="logo">MyLogo</div>
     <div class="nav">
       <a href="#about">About</a>
       <a href="#info">Information</a>
+      <a href="#research">My Research</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
 </div>
-
 <div class="content">
   <div class="portfolio-item" id="about">
     <h2>About Me</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </div>
   <div class="portfolio-item" id="info">
     <h2>Information</h2>
-    <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur aliquet quam id dui posuere.</p>
+    <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+  </div>
+  <div class="portfolio-item" id="research">
+    <h2>My Research</h2>
+    <div class="research-section">
+      <div class="research-item">
+        <img src="research1-thumbnail.jpg" alt="Research 1 Thumbnail">
+        <h3>Research Title 1</h3>
+        <a href="research1.html">View Summary</a>
+      </div>
+      <div class="research-item">
+        <img src="research2-thumbnail.jpg" alt="Research 2 Thumbnail">
+        <h3>Research Title 2</h3>
+        <a href="research2.html">View Summary</a>
+      </div>
+      <!-- Add more research items as needed -->
+    </div>
   </div>
   <div class="portfolio-item" id="contact">
     <h2>Contact</h2>
@@ -120,18 +76,13 @@
     <p>Phone: (123) 456-7890</p>
   </div>
 </div>
-
 <script>
-  // Optional: Smooth scrolling for nav links
   document.querySelectorAll('.nav a').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
   });
 </script>
-
 </body>
 </html>
