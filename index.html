@@ -11,6 +11,80 @@
     height: 100%;
     font-family: Arial, sans-serif;
   }
+  .album-grid {
+    --gap: 1rem;
+    /* Masonry trick ↓ */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 10px;       /* ← the “brick” height; tweak if you like */
+    grid-auto-flow: dense;     /* back-fills gaps */
+    gap: var(--gap);
+  }
+
+  .album-grid figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Image styling unchanged */
+  .album-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .album-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  .album-grid figcaption {
+    font-size: 0.9rem;
+    color: #444;
+    text-align: center;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 5vh;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  .modal-content {
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    margin: auto;
+    border-radius: 8px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #modalCaption {
+    text-align: center;
+    color: #ccc;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
   .video-container { position: relative; width: 100%; height: 100vh; overflow: hidden; }
   .video-container video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%); object-fit: cover; }
   .header { position: absolute; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px; box-sizing: border-box; }
@@ -42,6 +116,7 @@
       <a href="#about">About</a>
       <a href="#research">My Research</a>
       <!-- <a href="#contact">Contact</a> -->
+       <a href="#photo">Photo Gallery</a>
     </div>
   </div>
    <div class="name-text">Daniel Lopez</div>
@@ -75,11 +150,76 @@
       </div>
     </div>
   </div>
+  <div class="portfolio-item" id="photo">
+    <h2>Photo Gallery</h2>
+    <h3>Times in LA</h3>
+    <div class="album-grid">
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0018.JPG" alt="LA from the Getty">
+        <figcaption>LA From the Getty</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0028.JPG" alt="In Deep Thought">
+        <figcaption>In Deep Thought</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0099.JPG" alt="Dave's Cat">
+        <figcaption>Dave's Cat</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0124.JPG" alt="Hermosa Beach at Sunset">
+        <figcaption>Hermosa Beach at Sunset</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0209.JPG" alt="Chinese Grounds at Huntington">
+        <figcaption>Chinese Grounds at Huntington</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0227.JPG" alt="Ducks at Huntington">
+        <figcaption>Ducks at Huntingtont</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0359.JPG" alt="Manhattan Beach Pier">
+        <figcaption>Manhattan Beach Pier</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0377.JPG" alt="Young Gull at Hermosa">
+        <figcaption>Young Gull at Hermosa</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0408.JPG" alt="Double Crested Cormorant Hunting">
+        <figcaption>Double Crested Cormorant Hunting</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0426.JPG" alt="Santa Monica Beach">
+        <figcaption>Santa Monica Beach</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0242.JPG" alt="Hermosa Beach at Sunset">
+        <figcaption>Hermosa Beach at Sunset</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0498.JPG" alt="Yosemite Valley">
+        <figcaption>Yosemite Valley</figcaption>
+      </figure>
+      <figure>
+        <img src="photo_album/times_in_la/_DSC0443.JPG" alt="Cruising Down Santa Monica">
+        <figcaption>Cruising Down Santa Monica</figcaption>
+      </figure>
+      
+    </div>
+  </div>
   <!-- <div class="portfolio-item" id="contact">
     <h2>Contact</h2>
     <p>Email: </p>
   </div> -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="modalCaption"></div>
+  </div>
 </div>
+
 <script>
   document.querySelectorAll('.nav a').forEach(link => {
     link.addEventListener('click', function(e) {
@@ -87,6 +227,52 @@
       document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
   });
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const captionText = document.getElementById("modalCaption");
+  const closeBtn = document.querySelector(".modal-close");
+
+  // Attach click handler to all album images
+  document.querySelectorAll(".album-grid img").forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.textContent = img.closest("figure")?.querySelector("figcaption")?.textContent || "";
+    });
+  });
+
+  // Close on X click
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Optional: Close when clicking outside the image
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+  /* --- Masonry auto-span --- */
+  const grid = document.querySelector('.album-grid');
+  const allFigures = [...grid.querySelectorAll('figure')];
+  const rowHeight = parseInt(getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  const rowGap    = parseInt(getComputedStyle(grid).getPropertyValue('gap'));
+
+  function resizeAll() {
+    allFigures.forEach(fig => {
+      const img = fig.querySelector('img');
+      // If the image hasn’t loaded yet, wait for it
+      if (!img.complete) {
+        img.onload = () => resizeAll();
+      }
+      const rowSpan = Math.ceil((img.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+      fig.style.gridRowEnd = `span ${rowSpan}`;
+    });
+  }
+
+  /* Run once & also on window resize */
+  window.addEventListener('load', resizeAll);
+  window.addEventListener('resize', resizeAll);
 </script>
 </body>
 </html>
